@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="226" pageHeight="425" columnWidth="141" leftMargin="0" rightMargin="85" topMargin="0" bottomMargin="0" uuid="d1177f3b-c37d-4e6e-bbdd-3f6b13e298f1">
+	<property name="ireport.zoom" value="7.400249944258341"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="779"/>
+	<subDataset name="dataset1" uuid="3f8af960-6e3f-4835-84d6-b590e912d9f9"/>
+	<subDataset name="dataset2" uuid="7d732958-39d0-4ae2-aafe-4dcda846db0f"/>
+	<parameter name="tampil_idTransaksi" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     *,
+     transaksi.`id_transaksi` AS transaksi_id_transaksi,
+     transaksi.`tanggal_transaksi` AS transaksi_tanggal_transaksi,
+     transaksi.`tot_bayar` AS transaksi_tot_bayar,
+     transaksi.`id_user` AS transaksi_id_user,
+     dtl_transaksi.`qty` AS dtl_transaksi_qty,
+     dtl_transaksi.`sub_total` AS dtl_transaksi_sub_total,
+     dtl_transaksi.`id_transaksi` AS dtl_transaksi_id_transaksi,
+     dtl_transaksi.`id_roti` AS dtl_transaksi_id_roti,
+     roti.`nama` AS roti_nama,
+     roti.`harga_jual` AS roti_harga_jual,
+     transaksi.`Payment` AS transaksi_Payment,
+     transaksi.`Kembalian` AS transaksi_Kembalian,
+     transaksi.`Customer` AS transaksi_Customer
+FROM
+     `transaksi` transaksi INNER JOIN `dtl_transaksi` dtl_transaksi ON transaksi.`id_transaksi` = dtl_transaksi.`id_transaksi`
+     INNER JOIN `roti` roti ON dtl_transaksi.`id_roti` = roti.`id_roti`
+WHERE
+     transaksi.id_transaksi = $P{tampil_idTransaksi}]]>
+	</queryString>
+	<field name="id_transaksi" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tanggal_transaksi" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tot_bayar" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Payment" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Kembalian" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Customer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_user" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sub_total" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_roti" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stok" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga_beli" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_supp" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="harga_jual" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="transaksi_id_transaksi" class="java.lang.String"/>
+	<field name="transaksi_tanggal_transaksi" class="java.sql.Timestamp"/>
+	<field name="transaksi_tot_bayar" class="java.lang.Integer"/>
+	<field name="transaksi_id_user" class="java.lang.String"/>
+	<field name="dtl_transaksi_qty" class="java.lang.Integer"/>
+	<field name="dtl_transaksi_sub_total" class="java.lang.Integer"/>
+	<field name="dtl_transaksi_id_transaksi" class="java.lang.String"/>
+	<field name="dtl_transaksi_id_roti" class="java.lang.String"/>
+	<field name="roti_nama" class="java.lang.String"/>
+	<field name="roti_harga_jual" class="java.lang.Integer"/>
+	<field name="transaksi_Payment" class="java.lang.String"/>
+	<field name="transaksi_Kembalian" class="java.lang.String"/>
+	<field name="transaksi_Customer" class="java.lang.String"/>
+	<variable name="dtl_transaksi_sub_total_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{dtl_transaksi_sub_total}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="16" width="141" height="29" uuid="5da8078b-7e2d-4ce3-84e1-77bd467da3af"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Segoe UI" size="18" isBold="false" isItalic="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[LYLY BAKERY]]></text>
+			</staticText>
+			<image>
+				<reportElement x="52" y="9" width="61" height="16" uuid="0092ff83-94c4-48d8-b121-bc068e0f64bb"/>
+				<imageExpression><![CDATA["C:\\Netbenas 8.2\\WSIBD_WEEK7\\src\\Gambar\\Group 116.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="141" height="16" uuid="f3750ee9-0249-44f6-8bf3-c03699ccd8e8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="LiSu" size="6" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Jln. Veteran No.77a, Nganjuk, Ganung Kidul, Kec. Nganjuk Kab.NGANJUK, Jawa Timur 641419]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="141" height="1" uuid="2a3fe51c-2bf2-4109-b026-5262ecf9131c"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="45">
+			<staticText>
+				<reportElement x="1" y="1" width="51" height="9" uuid="ef7cbff8-aae0-4549-83ab-a010dff7284b"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[No. Transaksi:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="11" width="51" height="9" uuid="52acdcf1-7829-4336-babf-837043c2d118"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Hari/Tanggal :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="52" y="1" width="47" height="9" uuid="1d5f64ed-260f-446f-a0d0-b70de77df608"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_transaksi}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="31" width="141" height="1" uuid="37f85233-f4eb-444a-aadf-af644c33482b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="52" y="11" width="47" height="9" uuid="deb553e0-62a8-42ce-b2b2-921a8d0958af"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tanggal_transaksi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="52" y="20" width="47" height="9" uuid="b9c17674-23eb-4a9c-b2d9-840ebdafccaa"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_user}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="20" width="51" height="9" uuid="32ff4869-e2db-4ff0-8c2c-97e0f0eb5635"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Kasir        :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="32" width="25" height="9" uuid="aa2915c9-da2b-41ef-8ce1-37f5c995e92a"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Jumlah ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="32" width="42" height="9" uuid="fdcd3f5e-b96b-4a6a-8aea-0da6e99cc945"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Nama Barang]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="68" y="32" width="31" height="9" uuid="7616e470-eaf8-4c36-a11a-2f9528db2ef5"/>
+				<textElement textAlignment="Center">
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="99" y="32" width="34" height="9" uuid="646f7cfb-caf6-4176-adbc-431509afe30f"/>
+				<textElement textAlignment="Center">
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Sub Total]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="43" width="141" height="1" uuid="29c20770-9f12-405b-80f7-4c68972a2331"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="9">
+			<textField>
+				<reportElement x="1" y="0" width="25" height="9" uuid="ca41b453-cd4a-4b80-9bee-471c1c09e227"/>
+				<textElement textAlignment="Center">
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="0" width="42" height="9" uuid="5dab9682-0c5a-4bee-aea8-4820dcf5f1ca"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="68" y="0" width="31" height="9" uuid="7bbdfe4b-ceb7-439b-a52c-ee45210057f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="LiSu" size="7" isBold="false" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{harga_jual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="0" width="34" height="9" uuid="1090c59e-6606-464a-a0e3-4a04f494feeb"/>
+				<textElement textAlignment="Right">
+					<font fontName="LiSu" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sub_total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="78">
+			<staticText>
+				<reportElement x="0" y="41" width="141" height="21" uuid="5a957ead-a673-48e5-90f6-da3c72d856ba"/>
+				<textElement textAlignment="Center">
+					<font fontName="LiSu" size="8"/>
+				</textElement>
+				<text><![CDATA[Terimakasih Telah Melakukan Pembelian di Toko Ini :)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="5" width="61" height="9" uuid="2fd5cf6b-e22e-48c1-8fd9-187b90535ea3"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Total Bayar :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="14" width="61" height="9" uuid="4f61b9a0-1e64-40be-bf9d-1fada13b485d"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Payment     :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="23" width="61" height="9" uuid="24243f08-2907-4011-9a6a-0cce23c83756"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Kembalian   :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="99" y="5" width="34" height="9" uuid="77e2ffd5-6033-4c3b-82f8-80f44f48c85a"/>
+				<textElement textAlignment="Right">
+					<font fontName="LiSu" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{dtl_transaksi_sub_total_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="14" width="34" height="9" uuid="96311983-a583-4dc7-9bcd-5f23b8585c3f"/>
+				<textElement textAlignment="Right">
+					<font fontName="LiSu" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Payment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="23" width="34" height="9" uuid="765c429e-a16b-4add-8385-5d83183fc658"/>
+				<textElement textAlignment="Right">
+					<font fontName="LiSu" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Kembalian}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="99" y="32" width="34" height="9" uuid="23606e53-0e47-4c86-ab2b-b426d184ae5e"/>
+				<textElement textAlignment="Right">
+					<font fontName="LiSu" size="7" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Customer}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="32" width="61" height="9" uuid="c056a69f-618f-437a-8b59-ea182fbb2a5f"/>
+				<textElement>
+					<font fontName="LiSu" size="7"/>
+				</textElement>
+				<text><![CDATA[Atas Nama   :]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="2" width="141" height="1" uuid="e6426e19-a0f5-4b14-a04a-2c9961c8a91b"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
