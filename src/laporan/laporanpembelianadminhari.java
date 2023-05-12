@@ -30,9 +30,9 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
     }
     
      private void kosong(){
-        TXT_TGL.setText(null);
-        TXT_BLN.setText(null);
-        TXT_THN.setText(null);
+//        TXT_TGL.setText(null);
+//        TXT_BLN.setText(null);
+//        TXT_THN.setText(null);
     }
     
     public void setNama(String user) {
@@ -135,7 +135,10 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
      SimpleDateFormat fm = new SimpleDateFormat(tampilan);
      String tgll1 = String.valueOf(fm.format(tgl1.getDate()));
      String tgll2 = String.valueOf(fm.format(tgl2.getDate()));
-     String sql = "select pembelian.id_pembelian, pembelian.tgl_pembelian, sum(detail_pembelian.jumlah), pembelian.harga_total, pembelian.id_supp  from pembelian join detail_pembelian on pembelian.id_pembelian = detail_pembelian.id_pembelian  WHERE DATE(tgl_pembelian) BETWEEN '"+tgll1+"' AND '"+tgll2+"' group by pembelian.id_pembelian" ;
+     String sql = "select pembelian.id_pembelian, pembelian.tgl_pembelian, sum(detail_pembelian.jumlah),"
+             + " pembelian.harga_total, pembelian.id_supp  from pembelian join detail_pembelian on pembelian.id_pembelian "
+             + "= detail_pembelian.id_pembelian  WHERE DATE(tgl_pembelian) BETWEEN '"+tgll1+"' AND '"+tgll2+"'"
+             + " group by pembelian.id_pembelian" ;
      System.out.println(sql);
      java.sql.Connection conn = (Connection)db_koneksi.configDB();
      java.sql.Statement stm = conn.createStatement();
@@ -177,15 +180,11 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
         btn_kembali = new javax.swing.JButton();
         BTN_REFRESH = new javax.swing.JButton();
         BTN_CARI = new javax.swing.JButton();
-        TXT_THN = new javax.swing.JTextField();
-        TXT_BLN = new javax.swing.JTextField();
-        TXT_TGL = new javax.swing.JTextField();
         TXT_CARI = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         BTN_CETAK = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         txt_tanggal = new javax.swing.JLabel();
         txt_waktu = new javax.swing.JLabel();
         tgl1 = new com.toedter.calendar.JDateChooser();
@@ -272,20 +271,6 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
         });
         getContentPane().add(BTN_CARI, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 210, 100, 40));
 
-        TXT_THN.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        getContentPane().add(TXT_THN, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 210, 70, 40));
-
-        TXT_BLN.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        getContentPane().add(TXT_BLN, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 210, 70, 40));
-
-        TXT_TGL.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
-        TXT_TGL.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TXT_TGLActionPerformed(evt);
-            }
-        });
-        getContentPane().add(TXT_TGL, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 210, 70, 40));
-
         TXT_CARI.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         TXT_CARI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,12 +289,12 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 160, 90, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Tanggal");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 80, 50));
+        jLabel2.setText("Dari");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 210, 60, 40));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel3.setText("Bulan");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 200, -1, 50));
+        jLabel3.setText("Sampai");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 210, 70, 40));
 
         BTN_CETAK.setBackground(new java.awt.Color(245, 150, 92));
         BTN_CETAK.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -325,10 +310,6 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
         });
         getContentPane().add(BTN_CETAK, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 660, 110, 40));
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel4.setText("Tahun");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 200, 70, 50));
-
         txt_username.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txt_username.setText("Username");
         getContentPane().add(txt_username, new org.netbeans.lib.awtextra.AbsoluteConstraints(95, 120, 130, 40));
@@ -340,8 +321,8 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
         txt_waktu.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
         txt_waktu.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(txt_waktu, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 10, 80, 40));
-        getContentPane().add(tgl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, -1, -1));
-        getContentPane().add(tgl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 150, -1, -1));
+        getContentPane().add(tgl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, 110, 40));
+        getContentPane().add(tgl2, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 210, 110, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gambarlaporanadmin/Laporan pembelianhari Admin REVISI.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1080, 770));
@@ -369,10 +350,6 @@ public class laporanpembelianadminhari extends javax.swing.JFrame {
         cari();
         //        cari_hari();
     }//GEN-LAST:event_BTN_CARIActionPerformed
-
-    private void TXT_TGLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_TGLActionPerformed
-
-    }//GEN-LAST:event_TXT_TGLActionPerformed
 
     private void TXT_CARIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TXT_CARIActionPerformed
         // TODO add your handling code here:
@@ -433,15 +410,11 @@ private void cetak() {
     private javax.swing.JButton BTN_CARI;
     private javax.swing.JButton BTN_CETAK;
     private javax.swing.JButton BTN_REFRESH;
-    private javax.swing.JTextField TXT_BLN;
     private javax.swing.JTextField TXT_CARI;
-    private javax.swing.JTextField TXT_TGL;
-    private javax.swing.JTextField TXT_THN;
     private javax.swing.JButton btn_kembali;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
